@@ -1,53 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Productos</title>
-  <link rel="stylesheet" href="css/estilos.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Productos — TimeLux</title>
+  <link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="productos.html">Productos</a></li>
-        <li><a href="blogs.html">Blogs</a></li>
-        <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="registro.html">Registro</a></li>
-        <li><a href="carrito.html">🛒 Carrito</a></li>
-      </ul>
+  <header class="header">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt="TimeLux"/><span>TimeLux</span></a>
+    <nav class="nav">
+      <a href="index.html">Inicio</a>
+      <a href="productos.html" class="active">Productos</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="login.html">Login</a>
+      <a class="cart-link" href="#carrito">🛒 <span id="cart-count">0</span></a>
     </nav>
   </header>
 
-  <main>
-    <h2>Productos</h2>
-    <div id="productosContainer"></div>
+  <main class="products-page">
+    <h1>Catálogo de Relojes</h1>
+
+    <div class="filters">
+      <input id="search" type="search" placeholder="Buscar por nombre..." />
+      <select id="category"></select>
+      <select id="sort">
+        <option value="">Ordenar</option>
+        <option value="price-asc">Precio: menor a mayor</option>
+        <option value="price-desc">Precio: mayor a menor</option>
+      </select>
+    </div>
+
+    <div id="product-list" class="grid-3"></div>
+
+    <section id="carrito" class="cart">
+      <h2>Carrito</h2>
+      <div id="cart-items"></div>
+      <div class="cart-summary">
+        <p>Subtotal: <strong id="cart-subtotal">$0</strong></p>
+        <button id="btn-clear" class="btn-secondary">Vaciar</button>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Mi Tienda</p>
-  </footer>
+  <footer class="footer"><p>© <span id="year"></span> TimeLux</p></footer>
 
-  <script src="js/data.js"></script>
-  <script src="js/carrito.js"></script>
+  <!-- Orden IMPORTANTE -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('productosContainer');
-      productos.forEach(p => {
-        const div = document.createElement('div');
-        div.innerHTML = `
-          <img src="${p.imagen}" alt="${p.nombre}" width="150">
-          <h3>${p.nombre}</h3>
-          <p>$${p.precio}</p>
-          <button onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
-          <a href="detalle.html?id=${p.id}">Ver detalle</a>
-        `;
-        container.appendChild(div);
-      });
+    // Llenar categorías
+    const catSel = document.getElementById('category');
+    if (catSel) {
+      catSel.innerHTML = ['<option value="">Todas las categorías</option>', ...CATEGORIES.map(c=>`<option value="${c}">${c}</option>`)].join('');
+    }
+
+    const listEl = document.getElementById('product-list');
+    const searchEl = document.getElementById('search');
+    const sortEl   = document.getElementById('sort');
+
+    function card(p){
+      return `
+        <article class="card">
+          <img src="${p.img}" alt="${p.name}">
+          <div class="card-body">
+            <h3>${p.name}</h3>
+            <p class="price">${clp(p.price)}</p>
+            <div style="display:flex; gap:8px; align-items:center; justify-content:space-between">
+              <a class="btn" href="detalle-producto.html?id=${encodeURIComponent(p.id)}">Ver detalle</a>
+              <button class="btn-secondary" data-add="${p.id}">Añadir</button>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    function getFiltered(){
+      const q = (searchEl.value||'').toLowerCase();
+      const cat = catSel.value;
+      let arr = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) && (cat ? p.category===cat : true));
+      if (sortEl.value === 'price-asc')  arr.sort((a,b)=>a.price-b.price);
+      if (sortEl.value === 'price-desc') arr.sort((a,b)=>b.price-a.price);
+      return arr;
+    }
+
+    function renderList(){
+      const arr = getFiltered();
+      listEl.innerHTML = arr.map(card).join('');
+    }
+
+    [searchEl, catSel, sortEl].forEach(el => el && el.addEventListener('input', renderList));
+
+    listEl.addEventListener('click', (e)=>{
+      const btn = e.target.closest('[data-add]');
+      if(!btn) return;
+      addToCart(btn.dataset.add, 1);
+      btn.textContent = 'Añadido ✓';
+      setTimeout(()=>btn.textContent='Añadir', 900);
+      if (typeof renderCart === 'function') renderCart();
     });
+
+    renderList();
   </script>
 </body>
 </html>

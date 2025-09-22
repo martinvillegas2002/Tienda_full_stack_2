@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contacto — TimeLux</title>
+<link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+<header class="header">
+<a class="brand" href="index.html"><img src="assets/logo.png" alt="TimeLux"/><span>TimeLux</span></a>
+</header>
+
+
+<main class="form-page">
+<h1>Contacto</h1>
+
+
+<!-- Reglas: nombre requerido (<=100), comentario requerido (<=500); correo opcional pero con dominio permitido si se ingresa -->
+<form id="form-contact" novalidate>
+<label>Nombre (máx. 100)
+<input name="nombre" maxlength="100" required>
+</label>
+<label>Correo (duoc.cl, profesor.duoc.cl o gmail.com)
+<input name="correo" type="email" maxlength="100">
+</label>
+<label>Comentario (máx. 500)
+<textarea name="comentario" maxlength="500" required></textarea>
+</label>
+<button class="btn" type="submit">Enviar</button>
+<p class="form-hint" id="contact-hint"></p>
+</form>
+</main>
+
+
+<footer class="footer"><p>© <span id="year"></span> TimeLux</p></footer>
+
+
+<script src="js/validations.js"></script>
+<script> initContactForm(); </script>
+</body>
+</html>

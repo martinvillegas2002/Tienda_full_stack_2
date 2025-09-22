@@ -1,0 +1,79 @@
+/*
+Variables de color para mantener una paleta consistente
+--bg: color de fondo global
+--card: fondo de tarjetas
+--text: color de texto principal
+--muted: color de texto secundario
+--brand: color de marca (dorado)
+*/
+:root{ --bg:#0e0e10; --card:#16161a; --text:#eaeaea; --muted:#9aa0a6; --brand:#d4af37; }
+
+
+/* Reset básico y tipografía por defecto */
+*{ box-sizing:border-box }
+body{
+margin:0;
+font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
+background: var(--bg);
+color: var(--text);
+}
+
+
+a{ color: inherit; text-decoration: none } /* Enlaces sin subrayado y del color del texto */
+img{ max-width:100%; display:block } /* Imágenes fluidas */
+
+
+/* HEADER fijo con bordes y separación */
+.header{
+position: sticky; /* se queda arriba al hacer scroll */
+top: 0;
+display:flex; align-items:center; justify-content:space-between;
+padding:12px 20px;
+background:#121214; /* tono oscuro */
+border-bottom:1px solid #222;
+}
+
+
+/* Marca (logo + texto) */
+.brand{ display:flex; align-items:center; gap:10px; font-weight:700 }
+.brand img{ width:36px; height:36px }
+
+
+/* Navegación */
+.nav{ display:flex; gap:14px; align-items:center }
+.nav a{ opacity:.9 }
+.nav a.active, .nav a:hover{ color: var(--brand) } /* resalta enlace activo o hover */
+.cart-link{ font-weight:700 }
+
+
+/* HERO/banner */
+.hero{ position:relative }
+.hero img{ width:100%; height:360px; object-fit:cover; filter: contrast(1.1) }
+.hero-text{ position:absolute; inset:auto 0 20% 8%; max-width:560px }
+.hero-text h1{ font-size:44px; margin:0 0 8px; color: var(--brand) }
+
+
+/* Botones */
+.btn, .btn-secondary{
+padding:10px 16px; border-radius:10px; border:1px solid #333;
+background: var(--brand); color:#141414; font-weight:700; cursor:pointer;
+}
+.btn-secondary{ background:#232325; color:#fff }
+
+
+/* Footer */
+.footer{ padding:24px; text-align:center; border-top:1px solid #222; color: var(--muted) }
+
+
+/* Espaciado del contenido principal */
+main{ padding:24px }
+
+
+/* Utilidades de grilla para tarjetas */
+.grid{ display:grid; gap:20px }
+.grid-3{ grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) }
+.grid-2{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px }
+
+
+/* Tarjetas de producto */
+}

@@ -1,0 +1,82 @@
+<!doctype html>
+<select name="categoria" required></select> <!-- se llena desde CATEGORIES -->
+</label>
+<label>Imagen (URL opcional)
+<input name="imagen" type="url">
+</label>
+</div>
+<button class="btn" type="submit">Guardar producto</button>
+<p class="form-hint" id="prod-hint"></p>
+</form>
+
+
+<h2>Listado</h2>
+<table class="table" id="tabla-prod">
+<thead>
+<tr><th>Código</th><th>Nombre</th><th>Precio</th><th>Stock</th><th>Categoría</th><th></th></tr>
+</thead>
+<tbody></tbody>
+</table>
+</section>
+
+
+<!-- Panel de usuarios: formulario + tabla -->
+<section id="panel-usuarios" class="panel">
+<h1>Usuarios</h1>
+<form id="form-user" class="admin-form" novalidate>
+<div class="grid-2">
+<label>RUN (7-9, sin puntos ni guion)
+<input name="run" minlength="7" maxlength="9" required placeholder="19011022K">
+</label>
+<label>Nombre (máx. 50)
+<input name="nombre" maxlength="50" required>
+</label>
+<label>Apellidos (máx. 100)
+<input name="apellidos" maxlength="100" required>
+</label>
+<label>Correo (dominios permitidos)
+<input name="correo" type="email" maxlength="100" required>
+</label>
+<label>Fecha Nacimiento (opcional)
+<input name="fecha" type="date">
+</label>
+<label>Tipo de usuario
+<select name="tipo" required>
+<option value="Administrador">Administrador</option>
+<option value="Cliente">Cliente</option>
+<option value="Vendedor">Vendedor</option>
+</select>
+</label>
+<label>Región
+<select name="region" id="region" required></select>
+</label>
+<label>Comuna
+<select name="comuna" id="comuna" required></select>
+</label>
+<label>Dirección (máx. 300)
+<input name="direccion" maxlength="300" required>
+</label>
+</div>
+<button class="btn" type="submit">Guardar usuario</button>
+<p class="form-hint" id="user-hint"></p>
+</form>
+
+
+<h2>Listado</h2>
+<table class="table" id="tabla-user">
+<thead>
+<tr><th>RUN</th><th>Nombre</th><th>Correo</th><th>Tipo</th><th>Región</th><th>Comuna</th><th></th></tr>
+</thead>
+<tbody></tbody>
+</table>
+</section>
+</main>
+
+
+<!-- JS compartidos y específicos del admin -->
+<script src="js/products.js"></script> <!-- Para llenar categorías -->
+<script src="js/geo.js"></script> <!-- Regiones y comunas -->
+<script src="js/validations.js"></script> <!-- isAllowedEmail reutilizado -->
+<script src="js/admin.js"></script> <!-- Lógica del panel -->
+</body>
+</html>

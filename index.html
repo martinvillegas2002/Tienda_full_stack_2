@@ -1,32 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Tienda</title>
-  <link rel="stylesheet" href="css/estilos.css">
+<meta charset="utf-8" /> <!-- Define la codificación para caracteres latinos -->
+<meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Hace el sitio responsive en móviles -->
+<title>TimeLux — Relojería</title> <!-- Título de la pestaña del navegador -->
+<link rel="stylesheet" href="styles/style.css" /> <!-- Cargamos la hoja de estilos externa -->
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="productos.html">Productos</a></li>
-        <li><a href="blogs.html">Blogs</a></li>
-        <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="registro.html">Registro</a></li>
-        <li><a href="carrito.html">🛒 Carrito</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <h1>Bienvenido a Mi Tienda</h1>
-    <p>¡Explora nuestros productos y blogs!</p>
-  </main>
-  <footer>
-    <p>&copy; 2025 Mi Tienda</p>
-  </footer>
+<!-- HEADER: barra superior con logo y navegación -->
+<header class="header">
+<!-- Logo + nombre de la marca: al hacer clic vuelve al Home -->
+<a class="brand" href="index.html">
+<img src="assets/logo.png" alt="TimeLux"/> <!-- Imagen del logo -->
+<span>TimeLux</span> <!-- Texto de marca -->
+</a>
+
+
+<!-- Menú de navegación principal -->
+<nav class="nav">
+<!-- Hipervínculos para navegar entre páginas (requisito de la evaluación) -->
+<a href="index.html">Inicio</a>
+<a href="productos.html">Productos</a>
+<a href="blog.html">Blog</a>
+<a href="nosotros.html">Nosotros</a>
+<a href="contacto.html">Contacto</a>
+<a href="login.html">Login</a>
+<!-- Enlace al carrito (mostramos el total de ítems con #cart-count) -->
+<a class="cart-link" href="productos.html#carrito">🛒 <span id="cart-count">0</span></a>
+</nav>
+</header>
+
+
+<!-- MAIN: contenido principal de la página -->
+<main>
+<!-- HERO: sección destacada con imagen de fondo + texto y botón -->
+<section class="hero">
+<img src="assets/hero.jpg" alt="Relojería premium" /> <!-- Imagen de portada -->
+<div class="hero-text"> <!-- Contenedor del texto superpuesto al banner -->
+<h1>Elegancia en cada segundo</h1> <!-- Título principal -->
+<p>Descubre relojes clásicos y modernos, seleccionados para ti.</p> <!-- Subtítulo -->
+<a class="btn" href="productos.html">Ver catálogo</a> <!-- Botón que lleva al catálogo -->
+</div>
+</section>
+
+
+<!-- DESTACADOS: aquí inyectaremos productos desde JS (products.js + app.js) -->
+<section class="grid products" id="destacados">
+<h2>Destacados</h2>
+<div id="featured-list" class="grid-3"></div> <!-- Contenedor dinámico -->
+</section>
+</main>
+
+
+<!-- FOOTER: información al pie, el año se coloca con JS (app.js) -->
+<footer class="footer">
+<p>© <span id="year"></span> TimeLux — Relojería. Todos los derechos reservados.</p>
+</footer>
+
+
+<!-- JS: orden recomendado: datos de productos → carrito → lógica general -->
+<script src="js/products.js"></script> <!-- Catálogo (const PRODUCTS / CATEGORIES) -->
+<script src="js/cart.js"></script> <!-- Funciones del carrito (añadir, eliminar, subtotal, localStorage) -->
+<script src="js/app.js"></script> <!-- Inicializaciones generales (pintar destacados, año del footer) -->
 </body>
 </html>

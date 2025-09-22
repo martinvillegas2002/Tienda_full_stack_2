@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login — TimeLux</title>
+<link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+<!-- Header sencillo -->
+<header class="header">
+<a class="brand" href="index.html"><img src="assets/logo.png" alt="TimeLux"/><span>TimeLux</span></a>
+</header>
+
+
+<main class="form-page">
+<h1>Iniciar sesión</h1>
+
+
+<!-- Formulario con reglas: correo permitido y password 4-10 -->
+<form id="form-login" novalidate>
+<label>Correo (duoc.cl, profesor.duoc.cl o gmail.com)
+<input name="correo" type="email" maxlength="100" required>
+</label>
+<label>Contraseña (4 a 10 caracteres)
+<input name="password" type="password" minlength="4" maxlength="10" required>
+</label>
+<button class="btn" type="submit">Entrar</button>
+<p class="form-hint" id="login-hint"></p>
+</form>
+
+
+<p style="text-align:center;margin-top:8px">¿No tienes cuenta? <a href="registro.html">Regístrate</a></p>
+</main>
+
+
+<footer class="footer"><p>© <span id="year"></span> TimeLux</p></footer>
+
+
+<script src="js/validations.js"></script>
+<script> initLoginForm(); </script>
+</body>
+</html>

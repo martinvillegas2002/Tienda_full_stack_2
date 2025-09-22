@@ -1,99 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"> <!-- Configuración de idioma/acentos -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adaptación a pantallas móviles -->
-  <title>Registro de Usuario</title>
-  <link rel="stylesheet" href="css/estilos.css"> <!-- Enlace a la hoja de estilos externa -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Registro — TimeLux</title>
+<link rel="stylesheet" href="styles/style.css" />
 </head>
 <body>
-  <!-- Menú de navegación -->
-  <header>
-    <nav>
-      <ul>
-        <!-- Cada enlace lleva a otra página de la tienda -->
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="productos.html">Productos</a></li>
-        <li><a href="blogs.html">Blogs</a></li>
-        <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="registro.html">Registro</a></li>
-        <li><a href="carrito.html">🛒 Carrito</a></li>
-      </ul>
-    </nav>
-  </header>
+<header class="header">
+<a class="brand" href="index.html"><img src="assets/logo.png" alt="TimeLux"/><span>TimeLux</span></a>
+<nav class="nav"><a href="login.html">Ya tengo cuenta</a></nav>
+</header>
 
-  <!-- Contenido principal -->
-  <main>
-    <h2>Registro de Usuario</h2>
 
-    <!-- Formulario de registro -->
-    <form id="formRegistro">
-      <!-- Campo RUN -->
-      <label for="run">RUN:</label>
-      <input type="text" id="run" name="run" required>
-      <small class="error" id="errorRun"></small> <!-- Mensaje de error -->
+<main class="form-page">
+<h1>Crear cuenta</h1>
 
-      <br><br>
 
-      <!-- Campo Nombre -->
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" maxlength="50" required>
-      <small class="error" id="errorNombre"></small>
+<!-- Reglas: correo de dominios permitidos y password 4-10 -->
+<form id="form-register" novalidate>
+<label>Nombre (máx. 50)
+<input name="nombre" maxlength="50" required>
+</label>
+<label>Apellidos (máx. 100)
+<input name="apellidos" maxlength="100" required>
+</label>
+<label>Correo (duoc.cl, profesor.duoc.cl o gmail.com)
+<input name="correo" type="email" maxlength="100" required>
+</label>
+<label>Contraseña (4 a 10 caracteres)
+<input name="password" type="password" minlength="4" maxlength="10" required>
+</label>
+<button class="btn" type="submit">Registrarme</button>
+<p class="form-hint" id="reg-hint"></p>
+</form>
+</main>
 
-      <br><br>
 
-      <!-- Campo Apellidos -->
-      <label for="apellidos">Apellidos:</label>
-      <input type="text" id="apellidos" name="apellidos" maxlength="100" required>
-      <small class="error" id="errorApellidos"></small>
+<footer class="footer"><p>© <span id="year"></span> TimeLux</p></footer>
 
-      <br><br>
 
-      <!-- Campo Correo -->
-      <label for="correo">Correo:</label>
-      <input type="email" id="correo" name="correo" maxlength="100" required>
-      <small class="error" id="errorCorreo"></small>
-
-      <br><br>
-
-      <!-- Campo Dirección -->
-      <label for="direccion">Dirección:</label>
-      <input type="text" id="direccion" name="direccion" maxlength="300" required>
-      <small class="error" id="errorDireccion"></small>
-
-      <br><br>
-
-      <!-- Campo Fecha de nacimiento -->
-      <label for="fecha">Fecha de nacimiento:</label>
-      <input type="date" id="fecha" name="fecha">
-
-      <br><br>
-
-      <!-- Campo Tipo de usuario -->
-      <label for="tipo">Tipo de usuario:</label>
-      <select id="tipo" name="tipo" required>
-        <option value="">Selecciona...</option>
-        <option value="admin">Administrador</option>
-        <option value="cliente">Cliente</option>
-        <option value="vendedor">Vendedor</option>
-      </select>
-      <small class="error" id="errorTipo"></small>
-
-      <br><br>
-
-      <!-- Botón de enviar -->
-      <button type="submit">Registrarse</button>
-    </form>
-  </main>
-
-  <!-- Pie de página -->
-  <footer>
-    <p>&copy; 2025 Mi Tienda</p>
-  </footer>
-
-  <!-- Archivo JS con las validaciones -->
-  <script src="js/validaciones.js"></script>
+<script src="js/validations.js"></script>
+<script> initRegisterForm(); </script>
 </body>
 </html>

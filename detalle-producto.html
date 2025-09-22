@@ -1,0 +1,64 @@
+<!doctype html>
+<header class="header">
+<a class="brand" href="index.html"><img src="assets/logo.png" alt="TimeLux"/><span>TimeLux</span></a>
+<nav class="nav">
+<a href="productos.html">Productos</a>
+<a class="cart-link" href="productos.html#carrito">🛒 <span id="cart-count">0</span></a>
+</nav>
+</header>
+
+
+<main class="detail-page">
+<!-- Aquí se inyecta el detalle con JS leyendo el parámetro ?id= -->
+<article id="detail"></article>
+</main>
+
+
+<footer class="footer"><p>© <span id="year"></span> TimeLux</p></footer>
+
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/app.js"></script>
+
+
+<script>
+// Obtiene el parámetro id de la URL
+const params = new URLSearchParams(location.search);
+const id = params.get('id');
+const cont = document.getElementById('detail');
+
+
+// Busca el producto por id
+const p = PRODUCTS.find(x => x.id === id);
+if(!p){
+cont.innerHTML = '<p>Producto no encontrado.</p>';
+} else {
+cont.innerHTML = `
+<article class="grid" style="grid-template-columns: 1fr 1fr; gap:24px">
+<div><img src="${p.img}" alt="${p.name}"></div>
+<div>
+<h1>${p.name}</h1>
+<p class="price" style="font-size:20px">${clp(p.price)}</p>
+<p>${p.desc}</p>
+<div style="display:flex; gap:10px; align-items:center; margin-top:10px">
+<input id="qty" type="number" min="1" value="1" style="max-width:100px">
+<button class="btn" id="btn-add">Añadir al carrito</button>
+</div>
+</div>
+</article>`;
+
+
+// Maneja el botón de añadir usando cart.js
+document.getElementById('btn-add').addEventListener('click', ()=>{
+const qty = Math.max(1, parseInt(document.getElementById('qty').value||'1', 10));
+addToCart(p.id, qty);
+// feedback
+const btn = document.getElementById('btn-add');
+btn.textContent = 'Añadido ✓';
+setTimeout(()=>btn.textContent='Añadir al carrito', 900);
+});
+}
+</script>
+</body>
+</html>
