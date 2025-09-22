@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="registro.html">Registro</a></li>
+        <li><a href="carrito.html">🛒 Carrito</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Productos</h2>
+    <div id="productosContainer"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Mi Tienda</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/carrito.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('productosContainer');
+      productos.forEach(p => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+          <img src="${p.imagen}" alt="${p.nombre}" width="150">
+          <h3>${p.nombre}</h3>
+          <p>$${p.precio}</p>
+          <button onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
+          <a href="detalle.html?id=${p.id}">Ver detalle</a>
+        `;
+        container.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>
